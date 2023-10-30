@@ -1,4 +1,18 @@
-<?php require 'inc/data/products.php'; ?>
+<?php
+
+session_start();
+
+require 'inc/data/products.php';
+
+if (isset($_GET["add_to_cart"]) && !empty($_GET["add_to_cart"])) {
+    if (isset($_SESSION[$catalog[$_GET["add_to_cart"]]['name']]) && $_SESSION[$catalog[$_GET["add_to_cart"]]['name']] >= 1) {
+        $_SESSION[$catalog[$_GET["add_to_cart"]]['name']] += 1;
+    } else {
+        $_SESSION[$catalog[$_GET["add_to_cart"]]['name']] = 1;
+    }
+}
+
+?>
 <?php require 'inc/head.php'; ?>
 <section class="cookies container-fluid">
     <div class="row">
